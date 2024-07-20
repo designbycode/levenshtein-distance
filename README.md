@@ -1,18 +1,11 @@
-# This is my package levenshtein-distance
+# Levenshtein Distance
 
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/designbycode/levenshtein-distance.svg?style=flat-square)](https://packagist.org/packages/designbycode/levenshtein-distance)
 [![Tests](https://img.shields.io/github/actions/workflow/status/designbycode/levenshtein-distance/run-tests.yml?branch=main&label=tests&style=flat-square)](https://github.com/designbycode/levenshtein-distance/actions/workflows/run-tests.yml)
 [![Total Downloads](https://img.shields.io/packagist/dt/designbycode/levenshtein-distance.svg?style=flat-square)](https://packagist.org/packages/designbycode/levenshtein-distance)
 
-This is where your description should go. Try and limit it to a paragraph or two. Consider adding a small example.
+The LevenshteinDistance class provides a method to calculate the Levenshtein distance between two strings. The Levenshtein distance is a measure of the minimum number of single-character edits (insertions, deletions, or substitutions) required to change one word into the other.
 
-## Support us
-
-[<img src="https://github-ads.s3.eu-central-1.amazonaws.com/levenshtein-distance.jpg?t=1" width="419px" />](https://spatie.be/github-ad-click/levenshtein-distance)
-
-We invest a lot of resources into creating [best in class open source packages](https://spatie.be/open-source). You can support us by [buying one of our paid products](https://spatie.be/open-source/support-us).
-
-We highly appreciate you sending us a postcard from your hometown, mentioning which of our package(s) you are using. You'll find our address on [our contact page](https://spatie.be/about-us). We publish all received postcards on [our virtual postcard wall](https://spatie.be/open-source/postcards).
 
 ## Installation
 
@@ -22,12 +15,60 @@ You can install the package via composer:
 composer require designbycode/levenshtein-distance
 ```
 
+## Method: calculate
+### Parameters
+ - mixed $str1: The first string.
+ - mixed $str2: The second string.
+ - 
+### Return Value
+ - int: The Levenshtein distance between the two strings.
+### Description
+ - Calculates the Levenshtein distance between two strings. The method throws a TypeError if either of the input parameters is not a string.
+
+## Use Cases
+ 1. Spell Checking: Calculate the Levenshtein distance between a user's input and a list of known words to suggest corrections.
+ 2. Text Similarity: Measure the similarity between two pieces of text by calculating the Levenshtein distance.
+ 3. Data Validation: Verify the correctness of user input by calculating the Levenshtein distance between the input and a known valid value.
+
 ## Usage
+### Example 1: Calculating the Levenshtein distance between two strings
 
 ```php
-$skeleton = new Designbycode\LevenshteinDistance();
-echo $skeleton->echoPhrase('Hello, Designbycode!');
+$str1 = 'kitten';
+$str2 = 'sitting';
+$distance = LevenshteinDistance::calculate($str1, $str2);
+echo "Levenshtein distance: $distance"; // Output: 3
 ```
+
+### Example 2: Handling non-string input
+```php
+$str1 = 'hello';
+$nonString = 123;
+try {
+    LevenshteinDistance::calculate($str1, $nonString);
+} catch (TypeError $e) {
+    echo "Error: " . $e->getMessage(); // Output: Argument 2 passed to LevenshteinDistance::calculate() must be of the type string
+}
+```
+
+### Example 3: Using Levenshtein distance for spell checking
+```php
+$userInput = 'teh';
+$knownWords = ['the', 'tea', 'ten'];
+$minDistance = PHP_INT_MAX;
+$closestWord = '';
+
+foreach ($knownWords as $word) {
+    $distance = LevenshteinDistance::calculate($userInput, $word);
+    if ($distance < $minDistance) {
+        $minDistance = $distance;
+        $closestWord = $word;
+    }
+}
+
+echo "Did you mean: $closestWord"; // Output: Did you mean: the
+```
+
 
 ## Testing
 
