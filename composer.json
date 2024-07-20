@@ -1,9 +1,11 @@
 {
     "name": "designbycode/levenshtein-distance",
-    "description": "This is my package levenshtein-distance",
+    "description": "The LevenshteinDistance class provides a method to calculate the Levenshtein distance between two strings. The Levenshtein distance is a measure of the minimum number of single-character edits (insertions, deletions, or substitutions) required to change one word into the other.",
     "keywords": [
         "designbycode",
-        "levenshtein-distance"
+        "levenshtein-distance",
+        "levenshtein distance",
+        "levenshtein"
     ],
     "homepage": "https://github.com/designbycode/levenshtein-distance",
     "license": "MIT",
@@ -15,7 +17,7 @@
         }
     ],
     "require": {
-        "php": "^8.1"
+        "php": "^8.1|^8.2|^8.3"
     },
     "require-dev": {
         "pestphp/pest": "^2.20",
